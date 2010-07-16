@@ -5,7 +5,7 @@
  *
  * PHP version 5
  *
- * @category	M/V/C_name
+ * @category	Component
  * @package		deployment
  * @version		v1.0.0
  * @since		v1.0.0

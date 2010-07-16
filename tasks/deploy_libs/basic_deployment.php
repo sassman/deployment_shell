@@ -1,4 +1,5 @@
 <?php
+
 interface IDeploymentDestination {
 	public function disconnect();
 	public function connect($host, $port = null, $timeout = null);
@@ -56,23 +57,28 @@ class BasicDeployment {
 	function update($updateRevision = 'HEAD') {
 		clearstatcache();
 
-		if (!$this->__connect())
-			return false;
+		if (!$this->__connect()){
+		    $this->log("Error during connect to the Server.", 'error');
+		    return false;
+		}
 
-		if (($changedObjects = $this->source->getChangedFileList()) === false)
+		if (($changedObjects = $this->source->getChangedFileList()) === false){
+		    $this->log("Error retrieve the Update File list.", 'error');
 			return false;
+		}
 
 		$remotePath = $this->destinationConfig['path'];
 
 		foreach ($changedObjects as $file) {
 			if (empty ($file))
 				continue;
-			if (!$this->__uploadFile($file, $remotePath))
-				return false;
+            if (!$this->__uploadFile($file, $remotePath)){
+                $this->log("Error during Upload File.", 'error');
+                return false;
+            }
 		}
 
 		$this->updateDelete();
-
 		$this->__disconnect();
 
         if(empty($this->fileUploadLog[$this->useConfig]['.update.revision']))
@@ -80,9 +86,9 @@ class BasicDeployment {
         $this->fileUploadLog[$this->useConfig]['.update.revision'] =
                 $this->fileUploadLog[$this->useConfig]['.update.revision'] + 1;
         
-		$this->log( "Succesfully update Application. " .
+		$this->log( "Successfully update Application." .
                     "[revision:{$this->fileUploadLog[$this->useConfig]['.update.revision']}]",
-            'info');
+                    'info');
 
 		return true;
 	}
@@ -105,16 +111,20 @@ class BasicDeployment {
 			$this->config = $this->{'default'};
 		
 		$file = APP_PATH . '../.deployment';
-		if (!file_exists($file))
-			return;
-		$tmp = file_get_contents($file);
-		if (!empty ($tmp))
-			$this->fileUploadLog = unserialize($tmp);
-		
+		if (file_exists($file)){
+            $tmp = file_get_contents($file);
+            if (!empty ($tmp))
+                $this->fileUploadLog = unserialize($tmp);
+        }
+
 		$workerClass = $this->config['source'] . 'DeploymentSource';
 		App::import('Vendor', 'shells/tasks/deploy_libs/' . Inflector::underscore($workerClass));
 		$this->source = new $workerClass();
-		return $this->source != null;
+        if($this->source == null){
+            $this->log("No valid DeploymentSource ({$this->config['source']}DeploymentSource) found." , 'error');
+            return false;
+        }
+		return true;
 	}
 		
 	function afterFilter($deployAction) {
@@ -266,20 +276,32 @@ class BasicDeployment {
 	}
 	
 	public function start($params, $args) {
-		$deployAction = 'update';
-		$this->log('Starting Deployment...');
-	
-		$this->prepareArguments($params, $args);
-		
-		$success = 
-			$this->beforeFilter($deployAction) && 
-			$this->{$deployAction}(null) && 
-			$this->afterFilter($deployAction);
-	
-		if ($success == true) {
-			$this->log('Deployment finished.', 'success');
-		} else
-			$this->log('There was an error during deployment!', 'failure');
+        $deployAction = 'update';
+        $this->prepareArguments($params, $args);
+
+        $this->log('Starting Deployment...', 'info');
+        if($this->verbose){
+            $this->log('Excecute BeforeFilter...', 'info');
+        }
+        $success = $this->beforeFilter($deployAction);
+        if($success){
+            if($this->verbose){
+                $this->log("Excecute {$deployAction}...", 'info');
+            }
+            $success = $this->{$deployAction}(null);
+        }
+        if($success){
+            if($this->verbose){
+                $this->log("Excecute AfterFilter...", 'info');
+            }
+            $success = $this->afterFilter($deployAction);
+        }
+
+        if ($success == true) {
+            $this->log('Deployment finished.', 'success');
+        } else{
+            $this->log('There was an error during deployment!', 'failure');
+        }
 	}
 }
 ?>

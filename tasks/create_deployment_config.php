@@ -1,12 +1,12 @@
 <?php
 /**
- * type_name
+ * CreateDeploymentConfigTask
  * Created: 27.05.2010 / 16:39:53
  * 
  * PHP version 5
  * 
- * @category	M/V/C_name
- * @package		package_name
+ * @category	Task
+ * @package		deployment
  * @version		v1.0.0
  * @since		v1.0.0
  * @author		Sven Assmann <sven.assmann@lubico.biz>

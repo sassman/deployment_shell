@@ -1,4 +1,20 @@
 <?php
+/**
+ * DeployShell
+ * Created: 26.05.2010 / 13:50:22
+ *
+ * PHP version 5
+ *
+ * @category	Shell
+ * @package		deployment
+ * @version		v1.0.0
+ * @since		v1.0.0
+ * @author		Sven Assmann <sven.assmann@lubico.biz>
+ * @license		http://www.gnu.org/copyleft/gpl.html
+ * @link		http://www.lubico.biz
+ * @copyright	Copyright 2006-2010, Lubico Business
+ *
+ */
 
 App::import('Vendor', 'shells/tasks/deploy_libs/basic_deployment');
 
