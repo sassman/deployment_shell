@@ -15,10 +15,26 @@ interface IDeploymentSource {
 
 class BasicDeployment {
 
+    var $package = array(
+        'source' => 'File',
+        'destination' => array('Archive' => array(
+              'host'      => 'application-package.zip',
+              'login'     => '',
+              'password'  => '',
+              'port'      => '',
+              'timeout'   => '',
+              'path'		=> '/'
+        )),
+       'exclusions' => array(
+           'core.php'
+       )
+    );
+
 	var $exclude = array (
 		'app/config/database.php',
 		'app/config/deployment.php',
 		'tests/',
+        'tmp/',
 		'.git',
         '.idea',
         '.svn'
@@ -118,12 +134,12 @@ class BasicDeployment {
         }
 
 		$workerClass = $this->config['source'] . 'DeploymentSource';
-		App::import('Vendor', 'shells/tasks/deploy_libs/' . Inflector::underscore($workerClass));
-		$this->source = new $workerClass();
-        if($this->source == null){
-            $this->log("No valid DeploymentSource ({$this->config['source']}DeploymentSource) found." , 'error');
+        App::import('Lib', 'deployment.' . Inflector::underscore($workerClass));
+        if(!class_exists($workerClass)){
+            $this->log("No valid DeploymentSource ({$workerClass}) found." , 'error');
             return false;
         }
+        $this->source = new $workerClass();
 		return true;
 	}
 		
@@ -139,8 +155,13 @@ class BasicDeployment {
 		if (empty ($this->destination)) {
 			$destinationClass = array_keys($this->config['destination']);
 			$destinationClass = $destinationClass[0] . 'DeploymentDestination';
-			App :: import('Vendor', 'shells/tasks/deploy_libs/' . Inflector :: underscore($destinationClass));
-			$this->destination = new $destinationClass ();
+
+            App::import('Lib', 'deployment.' . Inflector::underscore($destinationClass));
+            if(!class_exists($destinationClass)){
+                $this->log("No valid DeploymentDestination ({$destinationClass}) found." , 'error');
+                return false;
+            }
+            $this->destination = new $destinationClass();
 			if (!$this->destination->connect($destConf['host'], $destConf['port'], $destConf['timeout'])) {
 				$this->log('Could not connect to ' . $destConf['host'], 'connect:error');
 				return false;

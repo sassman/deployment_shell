@@ -1,0 +1,6 @@
+[2010-07-30]
+- repackaged into a plugin
+- code optimising
+- add new command line options
+- add help
+- add packaging aka ArchiveDeploymentDesination
