@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list readonly="true" id="bc81c5ec-0f77-418e-bc91-7181d028159c" name="Default" comment="Adding" />
-    <list default="true" id="e911b5db-b1b6-4164-b92e-089aaca800d8" name="1.0.1" comment="- repackaged into a plugin&#10;- code optimising&#10;- add new command line options&#10;- add help&#10;- add packaging aka ArchiveDeploymentDesination">
+    <list default="true" id="e911b5db-b1b6-4164-b92e-089aaca800d8" name="1.0.1" comment="remove ide stuff">
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/dictionaries/sassman.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/deployment_shell.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
     </list>
     <ignored path=".idea/" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -281,7 +276,7 @@
     <option name="ENABLE_BACKGROUND_PROCESSES" value="false" />
     <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="- repackaged into a plugin&#10;- code optimising&#10;- add new command line options&#10;- add help&#10;- add packaging aka ArchiveDeploymentDesination" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove ide stuff" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -296,6 +291,7 @@
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
     <MESSAGE value="Some fixes with the DeploymentFileLog.&#10;Better error and message output with --verbose mode." />
     <MESSAGE value="- repackaged into a plugin&#10;- code optimising&#10;- add new command line options&#10;- add help&#10;- add packaging aka ArchiveDeploymentDesination" />
+    <MESSAGE value="remove ide stuff" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
