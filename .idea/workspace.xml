@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list readonly="true" id="bc81c5ec-0f77-418e-bc91-7181d028159c" name="Default" comment="Adding" />
-    <list default="true" id="e911b5db-b1b6-4164-b92e-089aaca800d8" name="1.0.1" comment="remove ide stuff" />
+    <list default="true" id="e911b5db-b1b6-4164-b92e-089aaca800d8" name="1.0.1" comment="remove ide stuff">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/dictionaries/sassman.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
+    </list>
     <ignored path=".idea/" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
