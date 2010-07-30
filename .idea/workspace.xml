@@ -1,26 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="bc81c5ec-0f77-418e-bc91-7181d028159c" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/templates/deploy/classes/deployment.ctp" afterPath="$PROJECT_DIR$/vendors/shells/templates/deploy/classes/deployment.ctp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/tasks/deploy_libs/git_deployment_source.php" afterPath="$PROJECT_DIR$/libs/git_deployment_source.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/libs/archive_deployment_destination.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/tasks/deploy_libs/basic_deployment.php" afterPath="$PROJECT_DIR$/libs/basic_deployment.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/deployment_shell.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CHANGELOG" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/tasks/deploy_libs/ftp_deployment_destination.php" afterPath="$PROJECT_DIR$/libs/ftp_deployment_destination.php" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/deploy.php" afterPath="" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/tasks/deploy_libs/file_deployment_source.php" afterPath="$PROJECT_DIR$/libs/file_deployment_source.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendors/shells/deploy.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/tasks/create_deployment_config.php" afterPath="$PROJECT_DIR$/vendors/shells/tasks/create_deployment_config.php" />
+    <list readonly="true" id="bc81c5ec-0f77-418e-bc91-7181d028159c" name="Default" comment="Adding" />
+    <list default="true" id="e911b5db-b1b6-4164-b92e-089aaca800d8" name="1.0.1" comment="- repackaged into a plugin&#10;- code optimising&#10;- add new command line options&#10;- add help&#10;- add packaging aka ArchiveDeploymentDesination">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/dictionaries/sassman.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/deployment_shell.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
     </list>
-    <ignored path=".idea/workspace.xml" />
-    <ignored path="deployment_shell.iws" />
     <ignored path=".idea/" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,10 +32,19 @@
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="basic_deployment.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="basic_deployment.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/libs/basic_deployment.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="48" column="62" selection-start="1152" selection-end="1152" vertical-scroll-proportion="0.018541409">
+            <state line="48" column="62" selection-start="1152" selection-end="1152" vertical-scroll-proportion="-0.65217394">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CHANGELOG" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/CHANGELOG">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="0" selection-start="148" selection-end="148" vertical-scroll-proportion="0.16885553">
               <folding />
             </state>
           </provider>
@@ -96,6 +95,11 @@
   </component>
   <component name="Git.Settings">
     <option name="GIT_EXECUTABLE" value="/usr/bin/git" />
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <array>
+        <option value="sasman" />
+      </array>
+    </option>
     <option name="CHECKOUT_INCLUDE_TAGS" value="false" />
   </component>
   <component name="IdeDocumentHistory">
@@ -232,20 +236,23 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="bc81c5ec-0f77-418e-bc91-7181d028159c" name="Default" comment="" />
+      <changelist id="e911b5db-b1b6-4164-b92e-089aaca800d8" name="1.0.1" comment="- repackaged into a plugin&#10;- code optimising&#10;- add new command line options&#10;- add help&#10;- add packaging aka ArchiveDeploymentDesination" />
       <created>1279273751084</created>
-      <updated>1279273751084</updated>
+      <updated>1280493349006</updated>
     </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-3" y="-3" width="1686" height="1022" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914287" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914287" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32914287" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914287" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21691176" sideWeight="0.0" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21691176" sideWeight="0.6628571" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20281863" sideWeight="0.0" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20281863" sideWeight="0.6628571" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914287" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914287" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -256,7 +263,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914287" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914287" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -275,7 +281,7 @@
     <option name="ENABLE_BACKGROUND_PROCESSES" value="false" />
     <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Some fixes with the DeploymentFileLog.&#10;Better error and message output with --verbose mode." />
+    <option name="LAST_COMMIT_MESSAGE" value="- repackaged into a plugin&#10;- code optimising&#10;- add new command line options&#10;- add help&#10;- add packaging aka ArchiveDeploymentDesination" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -289,6 +295,7 @@
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
     <MESSAGE value="Some fixes with the DeploymentFileLog.&#10;Better error and message output with --verbose mode." />
+    <MESSAGE value="- repackaged into a plugin&#10;- code optimising&#10;- add new command line options&#10;- add help&#10;- add packaging aka ArchiveDeploymentDesination" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -328,16 +335,16 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CHANGELOG">
+    <entry file="file://$PROJECT_DIR$/libs/basic_deployment.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="47" selection-start="147" selection-end="147" vertical-scroll-proportion="0.09057971">
+        <state line="48" column="62" selection-start="1152" selection-end="1152" vertical-scroll-proportion="-0.65217394">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/libs/basic_deployment.php">
+    <entry file="file://$PROJECT_DIR$/CHANGELOG">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="62" selection-start="1152" selection-end="1152" vertical-scroll-proportion="0.018541409">
+        <state line="6" column="0" selection-start="148" selection-end="148" vertical-scroll-proportion="0.16885553">
           <folding />
         </state>
       </provider>
