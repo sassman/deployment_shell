@@ -41,10 +41,11 @@ class BasicDeployment {
 	);
 
 	var $useConfig = 'default';
-	var $force = false;
-	var $verbose = false;
+
+    var $args = array('force' => false, 'verbose' => false, 'dry' => false);
 
 	var $fileUploadLog = array ();
+    var $last_checked_file = array('f' => null, 'cs' => null);
 
 	function isUploadable($file) {
 		$this->config['exclusions'] = am($this->config['exclusions'], $this->exclude);
@@ -64,7 +65,7 @@ class BasicDeployment {
 
 		if (isset ($this->fileUploadLog[$this->useConfig][$file])) {
 			if ($this->fileUploadLog[$this->useConfig][$file] == $this->checksum($file))
-				return $this->force;
+				return $this->args['force'];
 		}
 
 		return true;
@@ -144,6 +145,9 @@ class BasicDeployment {
 	}
 		
 	function afterFilter($deployAction) {
+        if($this->args['dry'])
+            return true;
+        
 		$datei = fopen(APP_PATH . '../.deployment', 'w');
 		fputs($datei, serialize($this->fileUploadLog));
 		fclose($datei);
@@ -200,17 +204,20 @@ class BasicDeployment {
 	
 		if ($this->isUploadable($localFile)) {
 			$this->log("Uploading {$localFile} to {$remotePath}...", "upload", false);
-			if (!$this->destination->uploadFile($file, $remoteFile)) {
-				$this->log('error during upload', 'upload:error');
-				return false;
-			}
+
+            if(!$this->args['dry'])
+                if (!$this->destination->uploadFile($file, $remoteFile)) {
+                    $this->log('error during upload', 'upload:error');
+                    return false;
+                }
 			$skipped = false;
 		}
 	
 		if (!$skipped) {
 			$this->log('Done!', 'upload');
-			$this->logFileUpload($localFile);
-		} elseif($this->verbose) {
+            if(!$this->args['dry'])
+			    $this->logFileUpload($localFile);
+		} elseif($this->args['verbose']) {
 			$this->log("{$localFile} skipped!", "upload:skipped");
 		}
 		return true;
@@ -248,6 +255,9 @@ class BasicDeployment {
 		}
 	
 		if (!empty ($text)) {
+            if($this->args['dry'])
+                $type = "dry::" . $type;
+
 			$output = '[' . $type . '] ' . $text . ($automaticLineBreak == true ? "\n" : "");
 			$history = $history . $output;
 			echo $output;
@@ -280,7 +290,12 @@ class BasicDeployment {
 		$this->fileUploadLog[$this->useConfig][$file] = $this->checksum($file);
 	}
 	protected function checksum($file) {
-		return sha1_file($file);
+        $last_checked_file = $this->last_checked_file;
+        if($last_checked_file['f'] != $file){
+            $last_checked_file['f'] = $file;
+            $last_checked_file['cs'] = md5_file($file); // much more faster than sha1_file
+        }
+        return $last_checked_file['cs'];
 	}
 	
 	protected function prepareArguments($params, $args){
@@ -289,11 +304,14 @@ class BasicDeployment {
 		}
 		
 		if(!empty($args['-force']) || !empty($args['f'])){
-			$this->force = true;
+			$this->args['force'] = true;
 		}
-		if(!empty($args['-verbose']) || !empty($args['v'])){
-			$this->verbose = true;
-		}
+        if(!empty($args['-verbose']) || !empty($args['v'])){
+            $this->args['verbose'] = true;
+        }
+        if(!empty($args['-dry']) || !empty($args['d'])){
+            $this->args['dry'] = true;
+        }
 	}
 	
 	public function start($params, $args) {
@@ -301,18 +319,18 @@ class BasicDeployment {
         $this->prepareArguments($params, $args);
 
         $this->log('Starting Deployment...', 'info');
-        if($this->verbose){
+        if($this->args['verbose']){
             $this->log('Excecute BeforeFilter...', 'info');
         }
         $success = $this->beforeFilter($deployAction);
         if($success){
-            if($this->verbose){
+            if($this->args['verbose']){
                 $this->log("Excecute {$deployAction}...", 'info');
             }
             $success = $this->{$deployAction}(null);
         }
         if($success){
-            if($this->verbose){
+            if($this->args['verbose']){
                 $this->log("Excecute AfterFilter...", 'info');
             }
             $success = $this->afterFilter($deployAction);
