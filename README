@@ -5,6 +5,12 @@ http://blog.lubico.biz/2010/07/cakephp-deployment/
 Included Features: (also see CHANGELOG)
 
 - provide a progressbar as default to better show what is going on during deployment
+- Deployment sources
+	- Local Filesystem (APP_DIR/..)
+	- local git (EXPERIMENAL)
+- Deployment destinations
+	- FTP
+	- ARCHIVE (ZIP File)
 
 
 Planned Features:
