@@ -146,7 +146,7 @@ class BasicDeployment {
         }
 
 		$workerClass = $this->config['source'] . 'DeploymentSource';
-        App::import('Lib', 'deployment.' . Inflector::underscore($workerClass));
+        App::import('Lib', 'deployment_shell.' . Inflector::underscore($workerClass));
         if(!class_exists($workerClass)){
             $this->log("No valid DeploymentSource ({$workerClass}) found." , 'error');
             return false;
@@ -171,7 +171,7 @@ class BasicDeployment {
 			$destinationClass = array_keys($this->config['destination']);
 			$destinationClass = $destinationClass[0] . 'DeploymentDestination';
 
-            App::import('Lib', 'deployment.' . Inflector::underscore($destinationClass));
+            App::import('Lib', 'deployment_shell.' . Inflector::underscore($destinationClass));
             if(!class_exists($destinationClass)){
                 $this->log("No valid DeploymentDestination ({$destinationClass}) found." , 'error');
                 return false;

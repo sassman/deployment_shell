@@ -16,8 +16,6 @@
  *
  */
 
-App::import('Lib', 'deployment.basic_deployment');
-
 class DeployShell extends Shell { // found in /plugins/vendors/shells/deploy.php
 
 	var $tasks = array(
@@ -34,6 +32,8 @@ class DeployShell extends Shell { // found in /plugins/vendors/shells/deploy.php
 	function main($params = array()) {
 		$this->out("Starting the CakePHP Deploy Shell");
 		$this->out("=================================");
+
+		App::import('Lib', 'deployment_shell.basic_deployment');
 
 		$deployDescriptor = new BasicDeployment();
 		$deployClass = 'AppDeployment';
