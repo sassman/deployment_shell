@@ -86,13 +86,24 @@ class BasicDeployment {
 
 		$remotePath = $this->destinationConfig['path'];
 
+		if(!$this->args['verbose']) {
+			$this->shell->ProgressBar->start(count($changedObjects));
+		}
 		foreach ($changedObjects as $file) {
-			if (empty ($file))
+			if (empty ($file)){
+				
+				if(!$this->args['verbose']) {
+					$this->shell->ProgressBar->next();
+				}
 				continue;
-            if (!$this->__uploadFile($file, $remotePath)){
-                $this->log("Error during Upload File.", 'error');
-                return false;
-            }
+			}
+			if (!$this->__uploadFile($file, $remotePath)){
+				$this->log("Error during Upload File.", 'error');
+				return false;
+			}
+			if(!$this->args['verbose']) {
+				$this->shell->ProgressBar->next();
+			}
 		}
 
 		$this->updateDelete();
@@ -203,20 +214,29 @@ class BasicDeployment {
 		$skipped = true;
 	
 		if ($this->isUploadable($localFile)) {
-			$this->log("Uploading {$localFile} to {$remotePath}...", "upload", false);
 
-            if(!$this->args['dry'])
-                if (!$this->destination->uploadFile($file, $remoteFile)) {
-                    $this->log('error during upload', 'upload:error');
-                    return false;
-                }
+			if($this->args['verbose']) {
+				$this->log("Uploading {$localFile} to {$remotePath}...", "upload", false);
+			}
+
+			if(!$this->args['dry']) {
+				if (!$this->destination->uploadFile($file, $remoteFile)) {
+					$this->log('error during upload', 'upload:error');
+					return false;
+				}
+			}
 			$skipped = false;
 		}
 	
-		if (!$skipped) {
-			$this->log('Done!', 'upload');
-            if(!$this->args['dry'])
+		if ( !$skipped ) {
+
+			if($this->args['verbose']) {
+				$this->log('Done!', 'upload');
+			}
+
+            if(!$this->args['dry']) {
 			    $this->logFileUpload($localFile);
+			}
 		} elseif($this->args['verbose']) {
 			$this->log("{$localFile} skipped!", "upload:skipped");
 		}

@@ -5,86 +5,91 @@
  *
  * PHP version 5
  *
- * @category    Shell
- * @package        deployment
- * @version        v1.0.0
- * @since        v1.0.0
- * @author        Sven Assmann <sven.assmann@lubico.biz>
- * @license        http://www.gnu.org/copyleft/gpl.html
- * @link        http://www.lubico.biz
- * @copyright    Copyright 2006-2010, Lubico Business
+ * @category		Shell
+ * @package			deployment
+ * @version			v1.0.2
+ * @since			v1.0.0
+ * @author			Sven Assmann <sven.assmann@lubico.biz>
+ * @license			http://www.gnu.org/copyleft/gpl.html
+ * @link			http://www.lubico.biz
+ * @copyright		Copyright 2006-2010, Lubico Business
  *
  */
 
 App::import('Lib', 'deployment.basic_deployment');
 
-class DeployShell extends Shell { // found in /vendors/shells/deploy.php
+class DeployShell extends Shell { // found in /plugins/vendors/shells/deploy.php
 
-    var $tasks = array('CreateDeploymentConfig');
-    var $version = "1.0.1";
+	var $tasks = array(
+		'CreateDeploymentConfig',
+		'ProgressBar',
+	);
 
-    function main($params = array()) {
-        $this->out("Starting the CakePHP Deploy Shell");
-        $this->out("=================================");
+	var $version = "1.0.2";
 
-        $deployDescriptor = new BasicDeployment();
+	function startup(){
+		$this->_welcome();
+	}
 
-        if (file_exists(CONFIGS . 'deployment.php')) {
-            require_once(CONFIGS . 'deployment.php');
-            $deployClass = 'AppDeployment';
-        }
-        else {
-            // die config muss erzeugt werden!
-            // wenn es nicht mit einem default descriptor gerufen wurde
-            if (!empty($this->args) && count($this->args) > 0){
-                $target = $this->args[0];
-                if(isset($deployDescriptor->{$target}) && 
-                        is_array($deployDescriptor->{$target})){
-                    $deployDescriptor->start($this->args, $this->params);
-                    return;
-                }
-            }
+	function main($params = array()) {
+		$this->out("Starting the CakePHP Deploy Shell");
+		$this->out("=================================");
 
-            // jetzt die config erzeugen
-            $this->CreateDeploymentConfig->execute();
-            if (file_exists(CONFIGS . 'deployment.php')) {
-                require_once(CONFIGS . 'deployment.php');
-                $deployClass = 'AppDeployment';
-            }
-            else
-                die();
-        }
+		$deployDescriptor = new BasicDeployment();
+		$deployClass = 'AppDeployment';
 
-        $deployDescriptor =& new $deployClass();
-        $deployDescriptor->start($this->args, $this->params);
-    }
+		if ( !config('deployment') || !class_exists($deployClass) ) {
+			// die config muss erzeugt werden!
+			// wenn es nicht mit einem default descriptor gerufen wurde
+			if (!empty($this->args) && count($this->args) > 0){
+				$target = $this->args[0];
+				if( isset($deployDescriptor->{$target}) 
+					&& is_array($deployDescriptor->{$target})
+				){
+					$deployDescriptor->shell = $this;
+					$deployDescriptor->start($this->args, $this->params);
+					return;
+				}
+			}
 
-    /**
-     * @return void
-     * Displays help contents
-     *
-     * @access public
-     */
-    function help() {
-        $this->out("CakePHP Deployment (version {$this->version}):");
-        $this->hr();
-        //          ---------------------------------------------------------------
-        $this->out('The deployment shell deploys your code to your hosting server during i.e. FTP.');
-        $this->out('If run with no command line arguments, Deployment use the default deployment descriptor from' .
-                    'your configuration an start the deployment.');
-        $this->hr();
-        $this->out("Usage: cake deploy [<options>] [<deploymentDescriptor>]");
-        $this->hr();
-        $this->out('options:');
-        $this->out("\t-v | --verbose  shows more information during process for interessted users.\n");
-        $this->out("\t-f | --force    retransfer all files also they are unchanged.\n");
-        $this->out("\thelp            shows this help.\n");
-        $this->out('deploymentDescriptor:');
-        $this->out("\n\tpackage\n\t\tdeploys the code to a zip package.");
-        $this->out("\n\tsee your config for more deployment descriptor");
-        $this->out();
+			// jetzt die config erzeugen
+			$this->CreateDeploymentConfig->execute();
+			if ( !config('deployment') || !class_exists($deployClass) ) {
+				die();
+			}
+		}
 
-    }
+		$deployDescriptor =& new $deployClass();
+		$deployDescriptor->shell = $this;
+		$deployDescriptor->start($this->args, $this->params);
+	}
+
+	/**
+	 * @return void
+	 * Displays help contents
+	 *
+	 * @access public
+	 */
+	function help() {
+		$this->out("CakePHP Deployment (version {$this->version}):");
+		$this->hr();
+		//          ---------------------------------------------------------------
+		$this->out('The deployment shell deploys your code to your hosting server during i.e. FTP.');
+		$this->out('If run with no command line arguments, Deployment use the default deployment descriptor from' .
+					'your configuration an start the deployment.');
+		$this->hr();
+		$this->out("Usage: cake deploy [<options>] [<deploymentDescriptor>]");
+		$this->hr();
+		$this->out('options:');
+		$this->out("\t-v | --verbose  shows more information during process for interessted users.\n");
+		$this->out("\t-f | --force    retransfer all files also they are unchanged.\n");
+		$this->out("\thelp            shows this help.\n");
+		$this->out('deploymentDescriptor:');
+		$this->out("\n\tpackage\n\t\tdeploys the code to a zip package.");
+		$this->out("\n\tsee your config for more deployment descriptor");
+		$this->out();
+
+	}
 }
 
 ?>

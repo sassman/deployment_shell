@@ -1,3 +1,8 @@
+[2010-10-16]
+- now a nice progressbar show the details of deployment state
+- verbose mode shows the old style of progress out put
+- restructure code form the shell 
+
 [2010-07-30]
 - repackaged into a plugin
 - code optimising
