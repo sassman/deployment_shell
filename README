@@ -2,10 +2,13 @@ More infos for usage:
 
 http://blog.lubico.biz/2010/07/cakephp-deployment/
 
+Included Features: (also see CHANGELOG)
+
+- provide a progressbar as default to better show what is going on during deployment
+
 
 Planned Features:
 
-- provide a progressbar as default to better show what is going on during deployment
 - provide a ssh/sftp as new deployment destination
 - adding github support for the deploy shell
  
